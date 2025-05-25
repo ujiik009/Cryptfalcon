@@ -1,8 +1,11 @@
 module.exports = [
+  // ✅ Support for CSS with Tailwind
+  // {
+  //   test: /\.css$/,
+  //   use: ['postcss-loader']
+  // },
   // Add support for native node modules
   {
-    // We're specifying native_modules in the test because the asset relocator loader generates a
-    // "fake" .node file which is really a cjs file.
     test: /native_modules[/\\].+\.node$/,
     use: 'node-loader',
   },
@@ -16,20 +19,20 @@ module.exports = [
       },
     },
   },
-  // Put your webpack loader rules in this array.  This is where you would put
-  // your ts-loader configuration for instance:
-  /**
-   * Typescript Example:
-   *
-   * {
-   *   test: /\.tsx?$/,
-   *   exclude: /(node_modules|.webpack)/,
-   *   loaders: [{
-   *     loader: 'ts-loader',
-   *     options: {
-   *       transpileOnly: true
-   *     }
-   *   }]
-   * }
-   */
+  
+  // ✅ Support for JSX and JS
+  {
+    test: /\.(js|jsx)$/,
+    exclude: /node_modules/,
+    use: {
+      loader: 'babel-loader'
+    }
+  },
+  // ✅ Support for TS and TSX
+  {
+    test: /\.(ts|tsx)$/,
+    exclude: /node_modules/,
+    use: 'ts-loader'
+  }
+
 ];
